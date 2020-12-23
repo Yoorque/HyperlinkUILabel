@@ -1,0 +1,16 @@
+PODS:
+  - HyperlinkUILabel (0.1.0)
+
+DEPENDENCIES:
+  - HyperlinkUILabel (from `../`)
+
+EXTERNAL SOURCES:
+  HyperlinkUILabel:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HyperlinkUILabel: 3a6d27ad58aecf0170e938f8c2b47b92644a75f8
+
+PODFILE CHECKSUM: 266f8b454e056c3cbce191e65c2a6a57c3297335
+
+COCOAPODS: 1.10.0
