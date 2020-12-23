@@ -1,6 +1,0 @@
-framework module HyperlinkUILabel {
-  umbrella header "HyperlinkUILabel-umbrella.h"
-
-  export *
-  module * { export * }
-}
