@@ -7,7 +7,6 @@
 
 import UIKit
 
-@available(iOS 10.0, *)
 @IBDesignable public class HyperlinkUILabel: UILabel {
 	@IBInspectable public var shouldUnderline:Bool = true {
 		didSet {
@@ -35,7 +34,6 @@ import UIKit
 		initialize()
 	}
 	
-	@available(iOS 10.0, *)
 	private func initialize() {
 		self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openLink)))
 		self.isUserInteractionEnabled = true
@@ -49,30 +47,33 @@ import UIKit
 		self.attributedText = hyperlinkify(hyperlinkedText ?? "", color: hyperlinkColor ?? UIColor.blue, font: self.font, shouldUnderline:shouldUnderline)
 	}
 	
-	@available(iOS 10.0, tvOS 10.0, *)
 	@objc private func openLink(_ recognizer: UITapGestureRecognizer) {
 		guard let text = self.attributedText?.string else {return}
 		let urls = markURLs(text)
 		for url in urls {
-			if let ranges = text.ranges(of: url) {
-				for range in ranges {
-					if recognizer.didTapAttributedTextInLabel(label: self, inRange: NSRange(range, in: text)) {
-						if UIApplication.shared.canOpenURL(URL(string: url)!) {
-							UIApplication.shared.open(URL(string: url)!, options: [:]) { (completed) in
-								if completed {
-									print("Link opened: \(url)")
+			if #available(iOS 10.0, *) {
+				if let ranges = text.ranges(of: url) {
+					for range in ranges {
+						if recognizer.didTapAttributedTextInLabel(label: self, inRange: NSRange(range, in: text)) {
+							if UIApplication.shared.canOpenURL(URL(string: url)!) {
+								UIApplication.shared.open(URL(string: url)!, options: [:]) { (completed) in
+									if completed {
+										print("Link opened: \(url)")
+									}
 								}
-							}
-						} else {
-							let validUrl = "https://".appending(url)
-							UIApplication.shared.open(URL(string: validUrl)!, options: [:]) { (completed) in
-								if completed {
-									print("Link corrected and opened: \(url)")
+							} else {
+								let validUrl = "https://".appending(url)
+								UIApplication.shared.open(URL(string: validUrl)!, options: [:]) { (completed) in
+									if completed {
+										print("Link corrected and opened: \(url)")
+									}
 								}
 							}
 						}
 					}
 				}
+			} else {
+				print("Opening link not supported on your device.")
 			}
 		}
 	}
@@ -96,14 +97,18 @@ import UIKit
 		
 		for url in urls {
 			//get range of url
-			if let foundRanges = attributedString.string.ranges(of: url) {
-				for range in foundRanges {
-					//add hyperlink attributes to string in range
-					attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: color ?? UIColor.blue, range: NSRange(range, in: url))
-					attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color ?? UIColor.blue, range: NSRange(range, in: url))
-					attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: shouldUnderline ? NSUnderlineStyle.single.rawValue : NSUnderlineStyle(), range: NSRange(range, in: url))
-					attributedString.addAttribute(NSAttributedString.Key.font, value: font ?? UIFont.systemFont(ofSize: 17), range: NSRange(range, in: url))
+			if #available(iOS 10.0, *) {
+				if let foundRanges = attributedString.string.ranges(of: url) {
+					for range in foundRanges {
+						//add hyperlink attributes to string in range
+						attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: color ?? UIColor.blue, range: NSRange(range, in: url))
+						attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color ?? UIColor.blue, range: NSRange(range, in: url))
+						attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: shouldUnderline ? NSUnderlineStyle.single.rawValue : NSUnderlineStyle(), range: NSRange(range, in: url))
+						attributedString.addAttribute(NSAttributedString.Key.font, value: font ?? UIFont.systemFont(ofSize: 17), range: NSRange(range, in: url))
+					}
 				}
+			} else {
+				// Fallback on earlier versions
 			}
 		}
 		return attributedString
