@@ -7,7 +7,7 @@
 
 import UIKit
 
-@available(iOS 10.0, tvOS 10.0, *)
+@available(iOS 10.0, *)
 @IBDesignable public class HyperlinkUILabel: UILabel {
 	@IBInspectable public var shouldUnderline:Bool = true {
 		didSet {
@@ -47,7 +47,7 @@ import UIKit
 	@objc func setProperties() {
 		self.attributedText = hyperlinkify(hyperlinkedText ?? "", color: hyperlinkColor ?? UIColor.blue, font: self.font, shouldUnderline:shouldUnderline)
 	}
-	@available(iOS 10.0, tvOS 10.0, *)
+	@available(iOS 10.0, *)
 	@objc private func openLink(_ recognizer: UITapGestureRecognizer) {
 		guard let text = self.attributedText?.string else {return}
 		let urls = markURLs(text)
@@ -112,7 +112,7 @@ import UIKit
 		
 	}
 }
-@available(iOS 10.0, tvOS 10.0, *)
+@available(iOS 10.0, *)
 private extension String {
 	func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [Range<Index>]? {
 		var ranges: [Range<Index>] = []
@@ -123,7 +123,7 @@ private extension String {
 	}
 }
 
-@available(iOS 10.0, tvOS 10.0, *)
+@available(iOS 10.0, *)
 private extension UITapGestureRecognizer {
 	func didTapAttributedTextInLabel(label: HyperlinkUILabel, inRange targetRange: NSRange) -> Bool {
 		guard let attrString = label.attributedText else {
