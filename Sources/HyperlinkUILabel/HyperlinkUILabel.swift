@@ -39,7 +39,7 @@ import UIKit
 		self.isUserInteractionEnabled = true
 		self.lineBreakMode = .byWordWrapping
 		self.shouldUnderline = true
-		self.hyperlinkedText = ""
+		self.hyperlinkedText = "https://github.com/Yoorque/HyperlinkUILabel"
 		self.hyperlinkColor = UIColor.blue
 	}
 	
