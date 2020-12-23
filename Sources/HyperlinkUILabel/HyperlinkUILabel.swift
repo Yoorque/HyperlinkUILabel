@@ -49,7 +49,7 @@ import UIKit
 		self.attributedText = hyperlinkify(hyperlinkedText ?? "", color: hyperlinkColor ?? UIColor.blue, font: self.font, shouldUnderline:shouldUnderline)
 	}
 	
-	@available(iOS 10.0, *)
+	@available(iOS 10.0, tvOS 10.0, *)
 	@objc private func openLink(_ recognizer: UITapGestureRecognizer) {
 		guard let text = self.attributedText?.string else {return}
 		let urls = markURLs(text)
