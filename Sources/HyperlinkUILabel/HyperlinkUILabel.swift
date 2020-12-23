@@ -35,6 +35,7 @@ import UIKit
 		initialize()
 	}
 	
+	@available(iOS 10.0, tvOS 10.0, *)
 	private func initialize() {
 		self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openLink)))
 		self.isUserInteractionEnabled = true
