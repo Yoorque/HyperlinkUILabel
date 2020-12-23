@@ -106,6 +106,11 @@ import UIKit
 		}
 		return attributedString
 	}
+	
+	public override func prepareForInterfaceBuilder() {
+		super.prepareForInterfaceBuilder()
+		
+	}
 }
 
 private extension String {
