@@ -8,7 +8,7 @@
 import UIKit
 
 @available(iOS 10.0, *)
-@IBDesignable class HyperlinkUILabel: UILabel {
+@IBDesignable public class HyperlinkUILabel: UILabel {
 	@IBInspectable public var shouldUnderline:Bool = true {
 		didSet {
 			setProperties()
