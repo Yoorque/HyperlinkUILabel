@@ -112,7 +112,7 @@ import UIKit
 		
 	}
 }
-
+@available(iOS 10.0, tvOS 10.0, *)
 private extension String {
 	func ranges(of substring: String, options: CompareOptions = [], locale: Locale? = nil) -> [Range<Index>]? {
 		var ranges: [Range<Index>] = []
@@ -123,7 +123,7 @@ private extension String {
 	}
 }
 
-@available(iOS 10.0, *)
+@available(iOS 10.0, tvOS 10.0, *)
 private extension UITapGestureRecognizer {
 	func didTapAttributedTextInLabel(label: HyperlinkUILabel, inRange targetRange: NSRange) -> Bool {
 		guard let attrString = label.attributedText else {
